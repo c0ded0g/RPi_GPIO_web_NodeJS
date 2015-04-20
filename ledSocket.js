@@ -9,7 +9,7 @@
  * AUTHOR: 	Mark Wrigley
  * VERSION: 	0.01
  * CREATED: 	15.04.2015
- * REVISION: 	dd.mm.2015
+ * REVISION: 	20.04.2015
  *
  * CONFIG:	tri-colour LED connected to GPIO 17, 27, 22
  * 		MCP3008 (ADC) connected to GPIO 18, 23 24, 25
