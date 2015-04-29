@@ -1,0 +1,161 @@
+<html>
+<head>
+    <script src = "/socket.io/socket.io.js" > </script>
+    <script type=text/javascript src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    
+    <script> 
+        var socket = io.connect();
+
+        socket.on('ipaddr', function(data){
+            document.getElementById("ipaddr").innerHTML=data;
+        });
+        socket.on('ipport', function(data){
+            document.getElementById("ipport").innerHTML=data;
+        });
+
+	socket.on('onTime', function(data){
+	    document.getElementById("time1").value=data;
+	});
+	socket.on('offTime', function(data){
+	    document.getElementById("time2").value=data;
+	});
+
+	socket.on('currentTime', function(data){
+	    document.getElementById("currentTime").innerHTML=data;
+	});
+
+        socket.on('an0', function(data){
+            document.getElementById("an0").innerHTML=data.toString();
+            if (data>900){
+                document.getElementById("an0").style.color="red";
+            } else {
+                document.getElementById("an0").style.color="green";
+            }
+            //document.getElementById("meter1").value=data.toString();
+            document.getElementById("meter1").value=parseInt(data);
+            
+        });
+        socket.on('an1', function(data){
+            document.getElementById("an1").innerHTML=data;
+            if (Number(data)>900){
+                document.getElementById("an1").style.color="red";
+            } else {
+                document.getElementById("an1").style.color="green";
+            }
+            document.getElementById("meter2").value=parseInt(data);
+        });
+        socket.on('an2', function(data){
+            document.getElementById("an2").innerHTML=data;
+            if (Number(data)>900){
+                document.getElementById("an2").style.color="red";
+            } else {
+                document.getElementById("an2").style.color="green";
+            }
+            document.getElementById("meter3").value=parseInt(data);
+        });
+        socket.on('an3', function(data){
+            document.getElementById("an3").innerHTML=data;
+            if (Number(data)>900){
+                document.getElementById("an3").style.color="red";
+            } else {
+                document.getElementById("an3").style.color="green";
+            }
+            document.getElementById("meter4").value=parseInt(data);
+        });
+        socket.on('an4', function(data){
+            document.getElementById("an4").innerHTML=data;
+            if (Number(data)>900){
+                document.getElementById("an4").style.color="red";
+            } else {
+                document.getElementById("an4").style.color="green";
+            }
+            document.getElementById("meter5").value=parseInt(data);
+        });
+        socket.on('an5', function(data){
+            document.getElementById("an5").innerHTML=data;
+            if (Number(data)>900){
+                document.getElementById("an5").style.color="red";
+            } else {
+                document.getElementById("an5").style.color="green";
+            }
+            document.getElementById("meter6").value=parseInt(data);
+        });
+        socket.on('an6', function(data){
+            document.getElementById("an6").innerHTML=data;
+            if (Number(data)>900){
+                document.getElementById("an6").style.color="red";
+            } else {
+                document.getElementById("an6").style.color="green";
+            }
+            document.getElementById("meter7").value=parseInt(data);
+        });
+        socket.on('an7', function(data){
+            document.getElementById("an7").innerHTML=data.toString();
+            if (Number(data)>900){
+                document.getElementById("an7").style.color="red";
+            } else {
+                document.getElementById("an7").style.color="green";
+            }
+            document.getElementById("meter8").value=parseInt(data);
+        });
+
+    </script>
+</head>
+
+<body>
+
+    <div id="container" style="width:500px">
+    
+        <div id="header" style="background-color:#FFA500;">
+            <text style="margin-bottom:0;text-align:center;">Welcome</text>
+            <table width="100%">
+            <tr>
+                <th align="left">Raspberry Pi 2 Nixie Clock</th>
+                <th align="right">Address:Port</th>
+            </tr>
+            <tr>
+                <td align="left"><label id="msg1"></label>you are :</td>
+                <td align="right"><label id="ipaddr"></label>:<label id="ipport"></label></td>
+            </tr>
+            </table>
+        </div>
+
+        <div id="status" style="background-color:#FFD700;height:500px;width:100px;float:left;padding:5px">
+            <p>
+            <b>analog inputs:</b><br>
+            <FONT FACE="courier">
+            AN0: <label id="an0"></label> <br> <meter id="meter1" x="27" y="20" value="512" min="0" max="1024" low="100" high="900"></meter> <br>
+            AN1: <label id="an1"></label> <br> <meter id="meter2" x="27" y="20" value="512" min="0" max="1024" low="100" high="900"></meter> <br>
+            AN2: <label id="an2"></label> <br> <meter id="meter3" x="27" y="20" value="512" min="0" max="1024" low="100" high="900"></meter> <br>
+            AN3: <label id="an3"></label> <br> <meter id="meter4" x="27" y="20" value="512" min="0" max="1024" low="100" high="900"></meter> <br>
+            AN4: <label id="an4"></label> <br> <meter id="meter5" x="27" y="20" value="512" min="0" max="1024" low="100" high="900"></meter> <br>
+            AN5: <label id="an5"></label> <br> <meter id="meter6" x="27" y="20" value="512" min="0" max="1024" low="100" high="900"></meter> <br>
+            AN6: <label id="an6"></label> <br> <meter id="meter7" x="27" y="20" value="512" min="0" max="1024" low="100" high="900"></meter> <br>
+            AN7: <label id="an7"></label> <br> <meter id="meter8" x="27" y="20" value="512" min="0" max="1024" low="100" high="900"></meter> <br>
+            </FONT>
+            </p>
+        </div>
+
+	  <FONT FACE="courier">
+	  <PRE>Current time is <label id="currentTime"></label> </PRE>
+	  <PRE>Clock comes on at  :  <input type="time" id="time1" onChange="socket.emit('clockOnOff','on',  value)"> </PRE>
+	  <PRE>Clock goes off at  :  <input type="time" id="time2" onChange="socket.emit('clockOnOff','off', value)"> </PRE>
+	  </FONT>
+
+        <div id="content" style="background-color:#EEEEEE;height:300px;width:390px;float:left;">
+            <p padding:20px;>
+                                    
+            </p>
+        </div>
+        
+
+
+        
+        <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+            Copyright 2015 codeDog
+        </div>
+        
+    </div>
+</body>
+
+</html>
