@@ -5,6 +5,55 @@
     
     <script> 
         var socket = io.connect();
+	socket.on('ledstatus', function(ledNumber,data) {
+	    switch (ledNumber) {
+		case 0:
+	            if (data==1) {
+        	        document.getElementById("r0on").checked=true;
+	                document.getElementById("r0off").checked=false;
+        	        document.getElementById("p_led0").style.color="green";
+	                document.getElementById("p_led0").style.backgroundColor="yellow";
+        	        document.getElementById("indic0").style.fill="lightgreen";
+        	    } else {
+	                document.getElementById("r0on").checked=false;
+        	        document.getElementById("r0off").checked=true;
+	                document.getElementById("p_led0").style.color="black";
+        	        document.getElementById("p_led0").style.backgroundColor="#FFD700";
+	                document.getElementById("indic0").style.fill="green";
+            	    }
+		    break;
+		case 1:
+	            if (data==1) {
+        	        document.getElementById("r1on").checked=true;
+	                document.getElementById("r1off").checked=false;
+        	        document.getElementById("p_led1").style.color="green";
+	                document.getElementById("p_led1").style.backgroundColor="yellow";
+        	        document.getElementById("indic1").style.fill="lightgreen";
+	            } else {
+	                document.getElementById("r1on").checked=false;
+        	        document.getElementById("r1off").checked=true;
+	                document.getElementById("p_led1").style.color="black";
+        	        document.getElementById("p_led1").style.backgroundColor="#FFD700";
+	                document.getElementById("indic1").style.fill="green";
+        	    }
+		    break;
+		case 2:
+	            if (data==1) {
+	                document.getElementById("r2on").checked=true;
+        	        document.getElementById("r2off").checked=false;
+	                document.getElementById("p_led2").style.color="green";
+        	        document.getElementById("p_led2").style.backgroundColor="yellow";
+                	document.getElementById("indic2").style.fill="lightgreen";
+	            } else {
+        	        document.getElementById("r2on").checked=false;
+	                document.getElementById("r2off").checked=true;
+        	        document.getElementById("p_led2").style.color="black";
+	                document.getElementById("p_led2").style.backgroundColor="#FFD700";
+        	        document.getElementById("indic2").style.fill="green";
+	            }
+		    break;
+	    }
+	});
 
         socket.on('ipaddr', function(data){
             document.getElementById("ipaddr").innerHTML=data;
@@ -102,8 +151,8 @@
             }
             document.getElementById("meter8").value=parseInt(data);
         });
-
     </script>
+    
 </head>
 
 <body>
@@ -115,6 +164,7 @@
             <table width="100%">
             <tr>
                 <th align="left">Raspberry Pi 2 Nixie Clock</th>
+                <th align="left">Raspberry Pi 2</th>
                 <th align="right">Address:Port</th>
             </tr>
             <tr>
@@ -125,6 +175,10 @@
         </div>
 
         <div id="status" style="background-color:#FFD700;height:500px;width:100px;float:left;padding:5px">
+            <b>status</b><br>
+            <text id="p_led0">LED0</text> <br>
+            <text id="p_led1">LED1</text> <br>
+            <text id="p_led2">LED2</text> <br>
             <p>
             <b>analog inputs:</b><br>
             <FONT FACE="courier">
@@ -158,8 +212,6 @@
             <PRE> <label id="keyDates6"></label></PRE>                        
             <PRE> <label id="keyDates7"></label></PRE>                        
             <PRE> <label id="keyDates8"></label></PRE>                        
-            </p>
-        </div>
         
 
 
