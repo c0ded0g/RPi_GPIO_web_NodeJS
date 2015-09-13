@@ -24,6 +24,10 @@
 	    document.getElementById("currentTime").innerHTML=data;
 	});
 
+	socket.on('keyDates', function(data1,data2){
+	    document.getElementById("keyDates"+data1.toString()).innerHTML=data2;
+	});
+
         socket.on('an0', function(data){
             document.getElementById("an0").innerHTML=data.toString();
             if (data>900){
@@ -144,7 +148,16 @@
 
         <div id="content" style="background-color:#EEEEEE;height:300px;width:390px;float:left;">
             <p padding:20px;>
-                                    
+	    important dates:
+            <PRE> <label id="keyDates0"></label></PRE>                        
+            <PRE> <label id="keyDates1"></label></PRE>                        
+            <PRE> <label id="keyDates2"></label></PRE>                        
+            <PRE> <label id="keyDates3"></label></PRE>                        
+            <PRE> <label id="keyDates4"></label></PRE>                        
+            <PRE> <label id="keyDates5"></label></PRE>                        
+            <PRE> <label id="keyDates6"></label></PRE>                        
+            <PRE> <label id="keyDates7"></label></PRE>                        
+            <PRE> <label id="keyDates8"></label></PRE>                        
             </p>
         </div>
         
